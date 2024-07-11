@@ -1,20 +1,55 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import ProfileHeader from '../../components/ProfileHeader';
+import { useRouter } from 'expo-router';
 import Classes from '@/components/Classes';
+import Homework from '@/components/Homework';
+import Advertisement from '@/components/Advertisement';
+import { Colors } from '@/constants/Colors';
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const router = useRouter();
+
+  const handleRedirectProfile = () => router.push('/profile');
+  const handleRedirectHomeWork = () => router.push('/homeWork');
 
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>
-        <Text style={styles.headerText}>Top Section</Text>
+        <ProfileHeader onRedirect={handleRedirectProfile}/>
       </View>
-      <View style={styles.bottomSection}>
-        <Classes />
-      </View>
+      
+      <ScrollView
+        style={styles.bottomSection}
+        contentInset={{ top: 0 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
+        <View>
+          <View style={[styles.section, { paddingTop: 34 }]}>
+            <Classes />
+          </View>
+          <View style={styles.section}>
+            <Homework />
+          </View>
+          <View style={styles.section}>
+            <Advertisement />
+          </View>
+          <View style={styles.section}>
+            <Classes />
+          </View>
+          <View style={styles.section}>
+            <Classes />
+          </View>
+          <View style={styles.section}>
+            <Classes />
+          </View>
+          <View style={styles.section}>
+            <Classes />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -23,37 +58,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  hamburger: {
-    position: 'absolute',
-    top: 60, // Ajusta esta posición según tus necesidades
-    left: 20,
-    zIndex: 10,
-  },
   topSection: {
-    height: '30%',
-    backgroundColor: '#1A162B',
+    height: '38%',
+    backgroundColor: Colors.azulMarinoProfundo,
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottomSection: {
     flex: 1,
     backgroundColor: 'white',
-    borderTopLeftRadius: 60, // Cambiado a 60
-    borderTopRightRadius: 60, // Cambiado a 60
-    marginTop: -40,
+    borderTopLeftRadius: 34,
+    borderTopRightRadius: 34,
+    marginTop: -54,
     padding: 20,
+    paddingBottom: 50,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 0,
+  },
+  section: {
+    paddingBottom: 45
   },
   headerText: {
     color: 'white',
     fontSize: 24,
   },
   bottomText: {
-    color: '#1A162B',
+    color: Colors.azulMarinoProfundo,
     fontSize: 18,
   },
 });

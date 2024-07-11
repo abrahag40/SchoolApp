@@ -1,12 +1,13 @@
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Dimensions } from 'react-native'
 import { Image } from 'expo-image';
 import React from 'react'
 
 type CurrentClassProps = {
   backgroundColor: string;
+  className: string;
 };
 
-const CurrentClass = ({ backgroundColor }: CurrentClassProps) => {
+const CurrentClass = ({ backgroundColor, className }: CurrentClassProps) => {
   return (
     <View style={[styles.container, { backgroundColor }]}>
       <View style={styles.contentLeft}>
@@ -17,7 +18,7 @@ const CurrentClass = ({ backgroundColor }: CurrentClassProps) => {
             transition={1000}
           />
           <View style={styles.textContainer}>
-            <Text style={[styles.subjectText, {paddingBottom: 3}]}>Math</Text>
+            <Text style={[styles.subjectText, {paddingBottom: 3}]}>{ className }</Text>
             <Text style={styles.scheduleText}>8:00 AM - 9:00 AM</Text>
           </View>
         </View>
@@ -33,9 +34,11 @@ const CurrentClass = ({ backgroundColor }: CurrentClassProps) => {
   )
 }
 
+const { width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
-    width: 370,
+    width: width * 0.85,
     height: 140,
     borderRadius: 20,
     paddingVertical: 20,
@@ -48,7 +51,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'center',
     paddingRight: 50,
-    paddingLeft: 50,
+    paddingLeft: 46,
     flex: 1,
     alignItems: 'center'
   },
@@ -60,7 +63,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    marginRight: 4
   },
   textContainer: {
     marginLeft: 10,
@@ -77,8 +79,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+    
   },
   picture: {
+    marginLeft: -8,
     width: 100,
     height: 100,
   },

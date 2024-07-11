@@ -7,10 +7,12 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 const { width: screenWidth } = Dimensions.get('window');
 
 const classes = [
-  { id: 1, backgroundColor: '#f1c40f' },
-  { id: 2, backgroundColor: '#e74c3c' },
-  { id: 3, backgroundColor: '#2ecc71' },
-  { id: 4, backgroundColor: '#3498db' },
+  { id: 4, backgroundColor: '#E6E6DF', className: 'Ciencias Nat.' },
+  { id: 1, backgroundColor: '#F1EEE9', className: 'Arte' },
+  { id: 3, backgroundColor: '#E6DEF4', className: 'Matemáticas' },
+  { id: 5, backgroundColor: '#E9F1F7', className: 'Educación Física' },
+  { id: 6, backgroundColor: '#F4F1E9', className: 'Música' },
+  { id: 7, backgroundColor: '#DEF4E6', className: 'Ciencias Sociales' },
 ];
 
 export default function Classes() {
@@ -22,8 +24,12 @@ export default function Classes() {
         <ThemedText type='default' style={{color: '#393939'}}>2 Classes left</ThemedText>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {classes.map((classItem) => (
-          <CurrentClass key={classItem.id} backgroundColor={classItem.backgroundColor} />
+        {classes.map(({id, backgroundColor, className}) => (
+          <CurrentClass
+            key={id}
+            backgroundColor={backgroundColor}
+            className={className}
+          />
         ))}
       </ScrollView>
     </View>
@@ -32,7 +38,7 @@ export default function Classes() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 40
+
   },
   content: {
     justifyContent: 'space-between',

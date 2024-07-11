@@ -16,7 +16,7 @@ const Row = ({ text, data }: RowProps) => {
   return (
     <View style={{ flexDirection: 'row', paddingBottom: 4 }}>
       <Text style={styles.subtitle}>{text}:</Text>
-      <Text>{data}</Text>
+      <Text style={styles.textData}>{data}</Text>
     </View>
   );
 };
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     width: '88%',
-    backgroundColor: '#24203490',
+    backgroundColor: '#3C395E90',
     height: 120,
     borderRadius: 20,
     paddingVertical: 20,
@@ -106,6 +106,9 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     overflow: 'hidden',
   },
+  textData: {
+    color: '#ffffff',
+  }
 });
 
 export default ProfileHeader;
