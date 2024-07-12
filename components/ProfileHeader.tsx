@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, Touchable, TouchableHighlight, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image';
 import { Redirect } from 'expo-router';
 
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     width: '88%',
     backgroundColor: '#3C395E90',
     height: 120,
-    borderRadius: 20,
+    borderRadius: 14,
     paddingVertical: 20,
     alignSelf: 'center',
   },

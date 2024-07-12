@@ -1,7 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import ProfileHeader from '../../components/ProfileHeader';
 import { useRouter } from 'expo-router';
 import Classes from '@/components/Classes';
@@ -13,7 +11,6 @@ const HomeScreen = () => {
   const router = useRouter();
 
   const handleRedirectProfile = () => router.push('/profile');
-  const handleRedirectHomeWork = () => router.push('/homeWork');
 
   return (
     <View style={styles.container}>
@@ -27,7 +24,7 @@ const HomeScreen = () => {
         contentContainerStyle={{ flexGrow: 1 }}
       >
         <View>
-          <View style={[styles.section, { paddingTop: 34 }]}>
+          <View style={[styles.section, { paddingTop: 28 }]}>
             <Classes />
           </View>
           <View style={styles.section}>
@@ -35,18 +32,6 @@ const HomeScreen = () => {
           </View>
           <View style={styles.section}>
             <Advertisement />
-          </View>
-          <View style={styles.section}>
-            <Classes />
-          </View>
-          <View style={styles.section}>
-            <Classes />
-          </View>
-          <View style={styles.section}>
-            <Classes />
-          </View>
-          <View style={styles.section}>
-            <Classes />
           </View>
         </View>
       </ScrollView>
@@ -79,7 +64,7 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   section: {
-    paddingBottom: 45
+    paddingBottom: 38
   },
   headerText: {
     color: 'white',
