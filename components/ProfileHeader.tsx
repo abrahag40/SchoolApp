@@ -24,7 +24,7 @@ const Row = ({ text, data }: RowProps) => {
 const ProfileHeader = ({ onRedirect }: CustomComponentProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onRedirect}>
-    <View style={styles.container}>
+    <View style={{ flexDirection: 'row' }}>
       <View style={styles.contentLeft}>
         <Text style={styles.titleText}>Abraham Hernández</Text>
         <View style={styles.rowsContainer}>
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     paddingVertical: 20,
     alignSelf: 'center',
+    top: -14
   },
   contentLeft: {
     paddingHorizontal: 10,

@@ -3,10 +3,12 @@ import { useWindowDimensions, KeyboardAvoidingView, Platform, ScrollView, StyleS
 import GeneralScreen from '@/components/GeneralScreen';
 import ProfileHeader from '@/components/ProfileHeader';
 import { useRouter } from 'expo-router';
+import { Colors } from '@/constants/Colors';
 
 interface Message {
   id: string;
   text: string;
+  isSentByUser: boolean; // Added property to distinguish message sender
 }
 
 const Chat = () => {
@@ -19,7 +21,12 @@ const Chat = () => {
 
   const sendMessage = () => {
     if (input.trim().length > 0) {
-      setMessages([...messages, { id: messages.length.toString(), text: input }]);
+      // Simulate sending message and receiving a response
+      setMessages([
+        ...messages,
+        { id: messages.length.toString(), text: input, isSentByUser: true },
+        { id: (messages.length + 1).toString(), text: 'This is a response from the teacher or AI.', isSentByUser: false }
+      ]);
       setInput('');
     }
   };
@@ -37,7 +44,23 @@ const Chat = () => {
               <ScrollView contentContainerStyle={styles.scrollView}>
                 <View style={styles.messagesContainer}>
                   {messages.map(message => (
-                    <Text key={message.id} style={styles.message}>{message.text}</Text>
+                    <View
+                      key={message.id}
+                      style={[
+                        styles.messageContainer,
+                        message.isSentByUser ? styles.sentMessageContainer : styles.receivedMessageContainer
+                      ]}
+                    >
+                      <Text
+                        style={
+                          message.isSentByUser ?
+                            styles.messageTextRecibed :
+                            styles.messageTextSend
+                        }
+                      >
+                        {message.text}
+                      </Text>
+                    </View>
                   ))}
                 </View>
               </ScrollView>
@@ -67,7 +90,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'flex-end', // Ensure the inputArea is always at the bottom
+    justifyContent: 'flex-end',
   },
   scrollView: {
     flexGrow: 1,
@@ -86,12 +109,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    elevation: 4, // Optional: Adds shadow for better visibility
+    elevation: 4,
   },
   input: {
     flex: 1,
-    borderWidth: 0, // Removed border
-    backgroundColor: '#E6E6E6', // Set background color
+    borderWidth: 0,
+    backgroundColor: '#E6E6E6',
     borderRadius: 4,
     padding: 10,
     marginRight: 10,
@@ -106,11 +129,27 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
-  message: {
+  messageContainer: {
+    maxWidth: '80%',
     padding: 10,
-    backgroundColor: '#f4f4f4',
     borderRadius: 4,
     marginBottom: 5,
+  },
+  sentMessageContainer: {
+    backgroundColor: '#007BFF',
+    alignSelf: 'flex-end',
+  },
+  receivedMessageContainer: {
+    backgroundColor: Colors.blancoHumo,
+    alignSelf: 'flex-start', 
+  },
+  messageTextSend: {
+    color: 'black', 
+    fontSize: 16,
+  },
+  messageTextRecibed: {
+    color: '#fff', 
+    fontSize: 16,
   },
 });
 
