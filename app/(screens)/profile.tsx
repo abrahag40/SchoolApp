@@ -4,6 +4,7 @@ import ProfileHeader from '@/components/ProfileHeader';
 import GeneralScreen from '@/components/GeneralScreen';
 import { useRouter } from 'expo-router';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Colors } from '@/constants/Colors';
 
 export default function Profile() {
   const router = useRouter();
@@ -42,12 +43,12 @@ export default function Profile() {
 
                   {/* Inician datos generales */}
 
-                  <View style={{ paddingBottom: 14 }}>
+                  <View style={ styles.paddingRow }>
                     <Text style={styles.label}>Name</Text>
                     <TextInput style={styles.input} placeholder="Enter name" />
                   </View>
 
-                  <View style={styles.inputRow}>
+                  <View style={[styles.inputRow, styles.paddingRow]}>
                     <View style={[styles.inputCol, { paddingRight: 16 }]}>
                       <Text style={styles.label}>Grado</Text>
                       <TextInput style={styles.input} placeholder="" />
@@ -58,7 +59,7 @@ export default function Profile() {
                     </View>
                   </View>
 
-                  <View style={styles.inputRow}>
+                  <View style={[styles.inputRow, styles.paddingRow]}>
                     <View style={[styles.inputCol, { paddingRight: 16 }]}>
                       <Text style={styles.label}>Date of Birth</Text>
                       <DateTimePicker
@@ -74,7 +75,7 @@ export default function Profile() {
                     </View>
                   </View>
 
-                  <View style={styles.inputRow}>
+                  <View style={[styles.inputRow, styles.paddingRow]}>
                     <View style={[styles.inputCol, { paddingRight: 16 }]}>
                       <Text style={styles.label}>Lugar de nacimiento</Text>
                       <TextInput style={styles.input} placeholder="" />
@@ -85,22 +86,22 @@ export default function Profile() {
                     </View>
                   </View>
 
-                  <View style={{ paddingBottom: 14 }}>
+                  <View style={ styles.paddingRow }>
                     <Text style={styles.label}>CURP</Text>
                     <TextInput style={styles.input} placeholder="CURP" />
                   </View>
 
-                  <View style={{ paddingBottom: 14 }}>
+                  <View style={ styles.paddingRow }>
                     <Text style={styles.label}>Father Name</Text>
                     <TextInput style={styles.input} placeholder="Enter name" />
                   </View>
 
-                  <View style={{ paddingBottom: 14 }}>
+                  <View style={ styles.paddingRow }>
                     <Text style={styles.label}>Mother Name</Text>
                     <TextInput style={styles.input} placeholder="Enter name" />
                   </View>
 
-                  <View style={styles.inputRow}>
+                  <View style={[styles.inputRow, styles.paddingRow]}>
                     <View style={[styles.inputCol, { paddingRight: 16 }]}>
                       <Text style={styles.label}>Núm. de casa</Text>
                       <TextInput style={styles.input} placeholder="" />
@@ -113,12 +114,12 @@ export default function Profile() {
 
                   {/* Inicia datos de dirección */}
 
-                  <View style={{ paddingBottom: 14 }}>
+                  <View style={ styles.paddingRow }>
                     <Text style={styles.label}>Calle</Text>
                     <TextInput style={styles.input} placeholder="" />
                   </View>
 
-                  <View style={styles.inputRow}>
+                  <View style={[styles.inputRow, styles.paddingRow]}>
                     <View style={[styles.inputCol, { paddingRight: 16 }]}>
                       <Text style={styles.label}>Estado</Text>
                       <TextInput style={styles.input} placeholder="" />
@@ -129,7 +130,7 @@ export default function Profile() {
                     </View>
                   </View>
 
-                  <View style={styles.inputRow}>
+                  <View style={[styles.inputRow, styles.paddingRow]}>
                     <View style={[styles.inputCol, { paddingRight: 16 }]}>
                       <Text style={styles.label}>CP</Text>
                       <TextInput style={styles.input} placeholder="" />
@@ -140,7 +141,7 @@ export default function Profile() {
                     </View>
                   </View>
 
-                  <View style={{ paddingBottom: 14 }}>
+                  <View style={ styles.paddingRow }>
                     <Text style={styles.label}>Indicaciones médicas</Text>
                     <TextInput
                       style={[styles.input, { minHeight: 100, textAlignVertical: 'top' }]}
@@ -150,7 +151,7 @@ export default function Profile() {
                     />
                   </View>
 
-                  <View style={{ paddingBottom: 14 }}>
+                  <View style={ styles.paddingRow }>
                     <Text style={styles.label}>Preferencias alimenticias</Text>
                     <TextInput
                       style={[styles.input, { minHeight: 100, textAlignVertical: 'top' }]}
@@ -178,7 +179,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
-    backgroundColor: '#FFFFFF',
   },
   header: {
     flexDirection: 'row',
@@ -192,7 +192,6 @@ const styles = StyleSheet.create({
   },
   viewProfileButtonText: {
     fontSize: 14,
-    color: '#333333',
     textDecorationLine: 'underline',
   },
   formGroup: {
@@ -201,8 +200,10 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginBottom: 15,
   },
-  inputRow: {
+  paddingRow:{
     paddingBottom: 14,
+  },
+  inputRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -211,11 +212,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: '#333333',
     marginBottom: 5,
   },
   input: {
-    backgroundColor: '#fcfcfc',
+    backgroundColor: Colors.inputColor,
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 8,

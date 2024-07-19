@@ -33,7 +33,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="message"
+        name="chat"
         options={{
           title: 'Chat',
           tabBarIcon: ({ color, focused }) => (

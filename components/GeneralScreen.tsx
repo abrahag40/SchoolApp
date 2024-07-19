@@ -1,22 +1,37 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Colors } from '@/constants/Colors'; 
+import { Colors } from '@/constants/Colors';
 
-const GeneralScreen = ({ children }: any) => {
+interface GeneralScreenProps {
+  children: {
+    topSection?: React.ReactNode;
+    bottomSection?: React.ReactNode;
+  };
+  scrollViewEnabled?: boolean;
+}
+
+const GeneralScreen = ({ children, scrollViewEnabled = true }: GeneralScreenProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>
         {/* Espacio reservado para el contenido del topSection */}
         {children.topSection}
       </View>
-      
-      <ScrollView
-        style={styles.bottomSection}
-        contentInset={{ top: 0 }}
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
-        {/* Espacio reservado para el contenido del bottomSection */}
-        {children.bottomSection}
-      </ScrollView>
+
+      {scrollViewEnabled ? (
+        <ScrollView
+          style={styles.bottomSection}
+          contentInset={{ top: 0 }}
+          contentContainerStyle={{ flexGrow: 1 }}
+        >
+          {/* Espacio reservado para el contenido del bottomSection */}
+          {children.bottomSection}
+        </ScrollView>
+      ) : (
+        <View style={styles.bottomSection}>
+          {/* Espacio reservado para el contenido del bottomSection */}
+          {children.bottomSection}
+        </View>
+      )}
     </View>
   );
 };
@@ -37,8 +52,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,
     marginTop: -54,
-    padding: 20,
-    paddingBottom: 50,
+    padding: 10,
+    paddingBottom: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,

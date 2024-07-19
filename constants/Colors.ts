@@ -27,6 +27,8 @@ export const Colors = {
   azulPalido: '#E9F1F7',
   grisClaro: '#E6E6DF',
 
+  inputColor: 'f2f2f290',
+
   light: {
     text: '#11181C',
     background: '#fff',
