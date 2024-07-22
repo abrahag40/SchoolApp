@@ -1,85 +1,69 @@
 import { useState } from 'react';
-import { useWindowDimensions, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
-import GeneralScreen from '@/components/GeneralScreen';
-import ProfileHeader from '@/components/ProfileHeader';
-import { useRouter } from 'expo-router';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import { getOpenAIResponse } from '@/services/IA';
+
+enum USER_TYPES {
+  USER = 'User',
+  BOT = 'Bot'
+}
 
 interface Message {
-  id: string;
   text: string;
-  isSentByUser: boolean; // Added property to distinguish message sender
+  sender: USER_TYPES; // Added property to distinguish message sender
 }
 
 const Chat = () => {
-  const { height: windowHeight } = useWindowDimensions();
-  const router = useRouter();
-  const handleRedirectProfile = () => router.push('/profile');
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
 
-  const sendMessage = () => {
-    if (input.trim().length > 0) {
-      // Simulate sending message and receiving a response
-      setMessages([
-        ...messages,
-        { id: messages.length.toString(), text: input, isSentByUser: true },
-        { id: (messages.length + 1).toString(), text: 'This is a response from the teacher or AI.', isSentByUser: false }
-      ]);
-      setInput('');
+  const sendMessage = async () => {
+    const userMessage = { text: input, sender: USER_TYPES.USER };
+    setMessages([...messages, userMessage]);
+
+    const aiResponse = await getOpenAIResponse(input);
+
+    console.log(aiResponse);
+
+    if (aiResponse.status) {
+      
     }
+    
+    const botMessage = { text: 'aiResponse', sender: USER_TYPES.BOT };
+    setMessages([...messages, userMessage, botMessage]);
+
+    setInput('');
   };
 
   return (
-    <GeneralScreen scrollViewEnabled={false}>
-      {{
-        topSection: <ProfileHeader onRedirect={handleRedirectProfile} />,
-        bottomSection: (
-          <KeyboardAvoidingView
-            style={styles.safeArea}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          >
-            <View style={styles.container}>
-              <ScrollView contentContainerStyle={styles.scrollView}>
-                <View style={styles.messagesContainer}>
-                  {messages.map(message => (
-                    <View
-                      key={message.id}
-                      style={[
-                        styles.messageContainer,
-                        message.isSentByUser ? styles.sentMessageContainer : styles.receivedMessageContainer
-                      ]}
-                    >
-                      <Text
-                        style={
-                          message.isSentByUser ?
-                            styles.messageTextRecibed :
-                            styles.messageTextSend
-                        }
-                      >
-                        {message.text}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              </ScrollView>
-              <View style={styles.inputArea}>
-                <TextInput
-                  style={styles.input}
-                  value={input}
-                  onChangeText={setInput}
-                  placeholder="Type a message"
-                />
-                <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-                  <Text style={styles.sendButtonText}>Send</Text>
-                </TouchableOpacity>
-              </View>
+    <KeyboardAvoidingView
+      style={styles.safeArea}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <View style={styles.container}>
+        <ScrollView style={styles.messagesContainer}>
+          {messages.map((msg, index) => (
+            <View key={index} style={msg.sender === USER_TYPES.USER ? styles.userMessage : styles.botMessage}>
+              <Text>
+                {msg.text}
+              </Text>
             </View>
-          </KeyboardAvoidingView>
-        ),
-      }}
-    </GeneralScreen>
+          ))}
+        </ScrollView>
+        <View style={styles.inputArea}>
+          <TextInput
+            style={styles.input}
+            value={input}
+            onChangeText={setInput}
+            placeholder="Type a message"
+          />
+          <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
+            <Text style={styles.sendButtonText}>Send</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -87,6 +71,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+    paddingTop: 70,
   },
   container: {
     flex: 1,
@@ -129,27 +114,19 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
-  messageContainer: {
-    maxWidth: '80%',
-    padding: 10,
-    borderRadius: 4,
-    marginBottom: 5,
-  },
-  sentMessageContainer: {
-    backgroundColor: '#007BFF',
+  userMessage: {
     alignSelf: 'flex-end',
+    backgroundColor: '#0084FF', //blue
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 5,
   },
-  receivedMessageContainer: {
+  botMessage: {
+    alignSelf: 'flex-start',
     backgroundColor: Colors.blancoHumo,
-    alignSelf: 'flex-start', 
-  },
-  messageTextSend: {
-    color: 'black', 
-    fontSize: 16,
-  },
-  messageTextRecibed: {
-    color: '#fff', 
-    fontSize: 16,
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 5,
   },
 });
 

@@ -13,7 +13,7 @@ export default function Profile() {
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(Platform.OS === 'ios');
     setDate(currentDate);
