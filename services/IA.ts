@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_KEY = 'sk-proj-24VzVA2JckaqX1Z7MVPuT3BlbkFJCx7FMxNxL4Hqc8C5ztPS';
+const apiKey = process.env.API_KEY;
 const API_URL = 'https://api.openai.com/v1/completions';  // Ajusta la URL a la correcta
 
 export const getOpenAIResponse = async (prompt: string) => {
-  console.log(API_KEY, API_URL);
+  console.log(apiKey, API_URL);
   
   try {
     const response = await axios.post(API_URL, {
@@ -14,7 +14,7 @@ export const getOpenAIResponse = async (prompt: string) => {
       temperature: 0.7
     }, {
       headers: {
-        'Authorization': `Bearer ${API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       }
     });
