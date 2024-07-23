@@ -69,8 +69,8 @@ const Chat = () => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1,
     backgroundColor: '#FFFFFF',
+    flex: 1,
     paddingTop: 70,
   },
   container: {
@@ -84,31 +84,31 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   inputArea: {
-    flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
     backgroundColor: '#FFFFFF',
-    borderTopWidth: 1,
     borderTopColor: '#DDDDDD',
-    position: 'absolute',
+    borderTopWidth: 1,
     bottom: 0,
-    left: 0,
-    right: 0,
     elevation: 4,
+    flexDirection: 'row',
+    left: 0,
+    padding: 10,
+    position: 'absolute',
+    right: 0,
   },
   input: {
-    flex: 1,
-    borderWidth: 0,
     backgroundColor: '#E6E6E6',
     borderRadius: 4,
-    padding: 10,
+    borderWidth: 0,
+    flex: 1,
     marginRight: 10,
+    padding: 10,
   },
   sendButton: {
     backgroundColor: '#007BFF',
     borderRadius: 4,
-    paddingVertical: 10,
     paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   sendButtonText: {
     color: '#fff',
@@ -117,16 +117,16 @@ const styles = StyleSheet.create({
   userMessage: {
     alignSelf: 'flex-end',
     backgroundColor: '#0084FF', //blue
-    padding: 10,
     borderRadius: 5,
     marginVertical: 5,
+    padding: 10,
   },
   botMessage: {
     alignSelf: 'flex-start',
     backgroundColor: Colors.blancoHumo,
-    padding: 10,
     borderRadius: 5,
     marginVertical: 5,
+    padding: 10,
   },
 });
 
